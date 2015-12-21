@@ -3,13 +3,14 @@
  */
 package edu.asu.type;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @author Arindam
  *
  */
-public interface ISample {
+public interface ISample extends Serializable{
 	public Integer getCorrectY();
 	public Integer getYSize();
 	public ArrayList<Double> getFeatureVector(int i);

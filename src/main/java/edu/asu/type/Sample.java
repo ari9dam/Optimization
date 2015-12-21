@@ -16,10 +16,10 @@ public class Sample implements ISample{
 	ArrayList<ArrayList<Double>> featureVectors;
 	
 	
-	public Sample(int id, int correctY, int ySize, ArrayList<ArrayList<Double>> featureVectors) {
+	public Sample(Integer id, Integer correctY, ArrayList<ArrayList<Double>> featureVectors) {
 		this.id = id;
 		this.correctY = correctY;
-		this.ySize = ySize;
+		this.ySize = featureVectors.size();
 		this.featureVectors = featureVectors;
 	}
 
@@ -44,6 +44,15 @@ public class Sample implements ISample{
 	 */
 	public int getId() {
 		return id;
+	}
+
+
+	/**
+	 * @return
+	 */
+	public ArrayList<ArrayList<Double>> getFeatureVectors() {
+		
+		return this.featureVectors;
 	}
 
 }
