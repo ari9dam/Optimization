@@ -30,10 +30,10 @@ public class TrainConditionalLogLinearModel {
 		v = new Vector();
 	}
 
-	public void train(String file) throws FileNotFoundException, IOException{
+	public void train(String file, String outputFile) throws FileNotFoundException, IOException{
 		
 		ObjectOutputStream oos = new ObjectOutputStream(
-				new FileOutputStream(file.substring(0,file.length()-4)+"_model.ser"));
+				new FileOutputStream(outputFile));
 	    
 		ObjectInputStream objectinputstream = null;
 		try {

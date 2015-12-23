@@ -51,7 +51,7 @@ public class DemoPredictCLM {
 		PredictCLM predicter = new PredictCLM(new File("demo_clm_model.ser").getAbsolutePath());
 		int y = predicter.predict(sample);
 		System.out.println(y);
-		Sample s1 = new Sample(1, y, sample.getFeatureVectors() );
+		Sample s1 = new Sample("1", y, sample.getFeatureVectors() );
 		
 		fv = new ArrayList<ArrayList<Double>>();
 		
@@ -71,7 +71,7 @@ public class DemoPredictCLM {
 		sample = new Sample(null,null,fv);
 		y = predicter.predict(sample);
 		System.out.println(y);
-		Sample s2 = new Sample(1, y, sample.getFeatureVectors() );
+		Sample s2 = new Sample("2", y, sample.getFeatureVectors() );
 		
 		data.add(s1);
 		data.add(s2);
@@ -81,7 +81,8 @@ public class DemoPredictCLM {
 		
 		TrainConditionalLogLinearModel tlm1 = new TrainConditionalLogLinearModel(false,0.01,null);
 		TrainConditionalLogLinearModel tlm2 = new TrainConditionalLogLinearModel(true,1.0,0.01);
-		tlm2.train(new File("demo_clm.ser").getAbsolutePath());
+		tlm2.train(new File("demo_clm.ser").getAbsolutePath(),
+				new File("demo_clm_model.ser").getAbsolutePath());
 		
 	}
 }

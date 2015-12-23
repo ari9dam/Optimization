@@ -10,13 +10,13 @@ import java.util.ArrayList;
  *
  */
 public class Sample implements ISample{
-	private Integer id;
+	private String id;
 	private Integer correctY;
 	private Integer ySize;
 	ArrayList<ArrayList<Double>> featureVectors;
 	
 	
-	public Sample(Integer id, Integer correctY, ArrayList<ArrayList<Double>> featureVectors) {
+	public Sample(String id, Integer correctY, ArrayList<ArrayList<Double>> featureVectors) {
 		this.id = id;
 		this.correctY = correctY;
 		this.ySize = featureVectors.size();
@@ -42,7 +42,7 @@ public class Sample implements ISample{
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
