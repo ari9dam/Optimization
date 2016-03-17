@@ -36,6 +36,7 @@ public class TrainConditionalLogLinearModel {
 				new FileOutputStream(outputFile));
 	    
 		ObjectInputStream objectinputstream = null;
+		int it = 0;
 		try {
 			objectinputstream = new ObjectInputStream(new FileInputStream(file));
 			@SuppressWarnings("unchecked")
@@ -59,9 +60,18 @@ public class TrainConditionalLogLinearModel {
 				}
 				if(this.smoothing)
 				v.mulAdd(dtheta, -1.0*this.lambda, theta);
-				change = v.mulAdd(theta, this.step, dtheta);
-				System.out.println("Iteration "+ ++iteration+" : "+ change);
-			}while(change>0.000001);
+				change = v.mulAdd(theta, this.step/data.size(), dtheta);
+				
+				iteration++;
+				System.out.println("Iteration "+ iteration+" : "+ change);
+				if(iteration > it +6000 ){
+					it = iteration;
+					if(this.step>0.001)
+						this.step = this.step/2;
+					System.out.println("Iteration "+ iteration+" : "+ change);
+					
+				}
+			}while(change>0.00001);
 			oos.writeObject(theta);
 			System.out.println(theta);
 		} catch (Exception e) {

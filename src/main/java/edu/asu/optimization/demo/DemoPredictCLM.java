@@ -20,7 +20,7 @@ import edu.asu.type.Sample;
  */
 public class DemoPredictCLM {
 	public static void main(String args[]) throws FileNotFoundException, IOException, ClassNotFoundException{
-		ArrayList<Double> theta = new ArrayList<Double>();
+		/*ArrayList<Double> theta = new ArrayList<Double>();
 		theta.add(5.197603788006235);
 		theta.add(1.0272234827348952);
 		theta.add(5.260487180163395);
@@ -77,12 +77,12 @@ public class DemoPredictCLM {
 		data.add(s2);
 		ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream("demo_clm.ser"));
 		o.writeObject(data);
-		o.close();
+		o.close();*/
 		
-		TrainConditionalLogLinearModel tlm1 = new TrainConditionalLogLinearModel(false,0.01,null);
+		TrainConditionalLogLinearModel tlm1 = new TrainConditionalLogLinearModel(false,1.0,null);
 		TrainConditionalLogLinearModel tlm2 = new TrainConditionalLogLinearModel(true,1.0,0.01);
-		tlm2.train(new File("demo_clm.ser").getAbsolutePath(),
-				new File("demo_clm_model.ser").getAbsolutePath());
+		tlm1.train("C:\\Users\\Arindam\\Dropbox\\Math Challenge\\sample_questions_training_data.ser",
+				"C:\\Users\\Arindam\\Dropbox\\Math Challenge\\sample_questions_model_unsmoothed.ser");
 		
 	}
 }
