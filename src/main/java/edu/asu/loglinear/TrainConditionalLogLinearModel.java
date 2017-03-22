@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import edu.asu.optimization.core.Vector;
 import edu.asu.type.Sample;
@@ -36,7 +37,7 @@ public class TrainConditionalLogLinearModel {
 				new FileOutputStream(outputFile));
 	    
 		ObjectInputStream objectinputstream = null;
-		int it = 0;
+		
 		try {
 			objectinputstream = new ObjectInputStream(new FileInputStream(file));
 			@SuppressWarnings("unchecked")
@@ -48,9 +49,10 @@ public class TrainConditionalLogLinearModel {
 				theta.add(0.0);
 				dtheta.add(0.0);
 			}
-			double change = 0.0;
+			double norm = 0.0;
 			do {
 				boolean isFirst = true;
+				
 				for(Sample sample: data){
 					if(isFirst){
 						dtheta = this.gradient(sample, theta);
@@ -60,18 +62,12 @@ public class TrainConditionalLogLinearModel {
 				}
 				if(this.smoothing)
 				v.mulAdd(dtheta, -1.0*this.lambda, theta);
-				change = v.mulAdd(theta, this.step/data.size(), dtheta);
+				norm = v.mulAdd(theta, this.step/data.size(), dtheta); 
 				
 				iteration++;
-				System.out.println("Iteration "+ iteration+" : "+ change);
-				if(iteration > it +6000 ){
-					it = iteration;
-					if(this.step>0.001)
-						this.step = this.step/2;
-					System.out.println("Iteration "+ iteration+" : "+ change);
-					
-				}
-			}while(change>0.00001);
+				System.out.println("Iteration "+ iteration+" : "+ norm);
+				
+			}while(norm>0.00001);
 			oos.writeObject(theta);
 			System.out.println(theta);
 		} catch (Exception e) {
